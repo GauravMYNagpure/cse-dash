@@ -9,6 +9,11 @@ import {
 
 const routes: Routes = [
   {
+    path: "",
+    redirectTo: "dashboard",
+    pathMatch: "full"
+  },
+  {
     path: "dashboard",
     component: DashboardComponent
   },
@@ -23,6 +28,7 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: []
 })
 export class AppRoutingModule {}
