@@ -1,35 +1,41 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpClientModule, HttpClientJsonpModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgxDaterangepickerMd } from "ngx-daterangepicker-material";
 
 import { ChartModule } from "angular-highcharts";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
+import { DashboardComponent, LoginComponent } from "./components";
+
 import {
-  DashboardComponent,
-  LoginComponent,
-  LogoutComponent
-} from "./components";
+  fakeBackendProvider,
+  JwtInterceptor,
+  ErrorInterceptor
+} from "./services";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    LoginComponent,
-    LogoutComponent
-  ],
+  declarations: [AppComponent, DashboardComponent, LoginComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpClientJsonpModule,
     AppRoutingModule,
     ChartModule,
     FormsModule,
-    NgbModule
+    ReactiveFormsModule,
+
+    NgxDaterangepickerMd.forRoot()
   ],
-  bootstrap: [AppComponent]
+
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
+  ]
 })
 export class AppModule {}
