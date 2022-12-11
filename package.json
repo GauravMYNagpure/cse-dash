@@ -29,7 +29,7 @@
         "@ng-bootstrap/ng-bootstrap": "^5.1.4",
         "angular-highcharts": "^8.0.3",
         "bootstrap": "^4.4.1",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "hammerjs": "^2.0.8",
         "highcharts": "^7.2.1",
         "ng-bootstrap": "^1.6.3",
